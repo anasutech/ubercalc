@@ -18,14 +18,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
+      - name: Install Gradle
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
+          unzip -q gradle-8.4-bin.zip
+          echo "$PWD/gradle-8.4/bin" >> $GITHUB_PATH
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build debug APK with Wrapper
-        run: ./gradlew assembleDebug
+      - name: Build debug APK
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
