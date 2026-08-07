@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">حاسبة ربح الرحلة</string>
+    <string name="accessibility_service_description">تقرأ تفاصيل طلب الرحلة (الأجرة، المسافة، الوقت) من شاشة تطبيق أوبر فقط عشان تحسب الربح المتوقع فورًا. ما تجمع ولا ترسل أي بيانات لأي سيرفر خارجي.</string>
+</resources>

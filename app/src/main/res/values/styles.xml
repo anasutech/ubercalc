@@ -1,0 +1,48 @@
+<resources>
+
+    <style name="StepLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="FieldLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dim</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="NumberField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:background">@color/panel</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColorHint">@color/dim</item>
+    </style>
+
+    <style name="ActionButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/amber</item>
+        <item name="android:textColor">@color/bg</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line</item>
+        <item name="android:layout_marginVertical">18dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="حاسبة ربح الرحلة"
+            android:textColor="@color/text"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تحسب تلقائيًا فوق شاشة طلب الرحلة بأوبر"
+            android:textColor="@color/dim"
+            android:textSize="13sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- خطوة 1 -->
+        <TextView
+            style="@style/StepLabel"
+            android:text="الخطوة 1 — صلاحية قراءة الشاشة" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dim"
+            android:textSize="12sp"
+            android:layout_marginBottom="10dp"
+            android:text="فعّل الخدمة من: الإعدادات ← إمكانية الوصول ← حاسبة ربح الرحلة" />
+        <Button
+            android:id="@+id/btnAccessibility"
+            style="@style/ActionButton"
+            android:text="فتح إعدادات إمكانية الوصول" />
+
+        <!-- خطوة 2 -->
+        <TextView
+            style="@style/StepLabel"
+            android:text="الخطوة 2 — صلاحية العرض فوق التطبيقات" />
+        <Button
+            android:id="@+id/btnOverlay"
+            style="@style/ActionButton"
+            android:text="فتح إعدادات العرض فوق التطبيقات" />
+
+        <View style="@style/Divider" />
+
+        <!-- الإعدادات -->
+        <TextView
+            style="@style/StepLabel"
+            android:text="إعدادات الحساب" />
+
+        <TextView style="@style/FieldLabel" android:text="سعر البنزين ($/غالون)" />
+        <EditText
+            android:id="@+id/etGas"
+            style="@style/NumberField"
+            android:hint="3.90" />
+
+        <TextView style="@style/FieldLabel" android:text="استهلاك سيارتك (ميل/غالون)" />
+        <EditText
+            android:id="@+id/etMpg"
+            style="@style/NumberField"
+            android:hint="17.5" />
+
+        <TextView style="@style/FieldLabel" android:text="تكلفة الصيانة والتآكل ($/ميل)" />
+        <EditText
+            android:id="@+id/etWear"
+            style="@style/NumberField"
+            android:hint="0.12" />
+
+        <TextView style="@style/FieldLabel" android:text="هدفك بالدخل ($/ساعة)" />
+        <EditText
+            android:id="@+id/etTarget"
+            style="@style/NumberField"
+            android:hint="20" />
+
+        <Button
+            android:id="@+id/btnSave"
+            style="@style/ActionButton"
+            android:layout_marginTop="12dp"
+            android:text="حفظ الإعدادات" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/green"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</ScrollView>
