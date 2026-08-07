@@ -68,18 +68,21 @@ object RideCalculator {
 object FareParser {
 
     private val fareRegex = Regex("""\$\s?([\d,]+(?:\.\d{1,2})?)""")
-    private val tripSegmentRegex = Regex("""(\d+(?:\.\d+)?)\s*(?:min|mins)\b[^)]*?([\d,]+(?:\.\d+)?)\s*mi\b""", RegexOption.IGNORE_CASE)
+    // النمط الشامل لقراءة أي سطر يحتوي على دقائق وم الأميال (سواء بالصيغة العادية أو المتعددة)
+    private val segmentRegex = Regex("""(\d+(?:\.\d+)?)\s*(?:min|mins)\b[^)]*?([\d,]+(?:\.\d+)?)\s*mi\b""", RegexOption.IGNORE_CASE)
 
     fun parse(allText: List<String>): ParsedRide? {
         val joined = allText.joinToString(" | ")
 
+        // استخراج الأجرة (مثال: $14.09 أو $8.11)
         val fareMatch = fareRegex.find(joined) ?: return null
         val fare = fareMatch.groupValues[1].replace(",", "").toDoubleOrNull() ?: return null
 
         var totalMinutes = 0.0
         var totalMiles = 0.0
 
-        val matches = tripSegmentRegex.findAll(joined)
+        // البحث عن كل مقاطع الوقت والمسافة في الشاشة وجمعها
+        val matches = segmentRegex.findAll(joined)
         for (match in matches) {
             val mins = match.groupValues[1].toDoubleOrNull() ?: 0.0
             val miles = match.groupValues[2].replace(",", "").toDoubleOrNull() ?: 0.0
@@ -87,13 +90,16 @@ object FareParser {
             totalMiles += miles
         }
 
-        // طريقة احتياطية في حال اختلاف تنسيق الشاشة قليلاً
+        // طريقة احتياطية دقيقة جداً إذا كان النص مقسماً بطريقة أخرى
         if (totalMiles <= 0.0 || totalMinutes <= 0.0) {
-            val fallbackMilesRegex = Regex("""([\d,]+(?:\.\d+)?)\s*mi\b""", RegexOption.IGNORE_CASE)
-            val fallbackMinsRegex = Regex("""(\d+(?:\.\d+)?)\s*(?:min|mins)\b""", RegexOption.IGNORE_CASE)
+            val allMiles = Regex("""([\d,]+(?:\.\d+)?)\s*mi\b""", RegexOption.IGNORE_CASE)
+                .findAll(joined).mapNotNull { it.groupValues[1].replace(",", "").toDoubleOrNull() }.toList()
+            
+            val allMins = Regex("""(\d+(?:\.\d+)?)\s*(?:min|mins)\b""", RegexOption.IGNORE_CASE)
+                .findAll(joined).mapNotNull { it.groupValues[1].toDoubleOrNull() }.toList()
 
-            totalMiles = fallbackMilesRegex.findAll(joined).mapNotNull { it.groupValues[1].replace(",", "").toDoubleOrNull() }.sum()
-            totalMinutes = fallbackMinsRegex.findAll(joined).mapNotNull { it.groupValues[1].toDoubleOrNull() }.sum()
+            totalMiles = allMiles.sum()
+            totalMinutes = allMins.sum()
         }
 
         if (totalMiles <= 0.0 || totalMinutes <= 0.0) return null
